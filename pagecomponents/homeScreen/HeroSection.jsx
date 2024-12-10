@@ -1,51 +1,85 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, PanResponder, Animated } from "react-native";
+import { ImageBackground } from "react-native-web";
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [swiping, setSwiping] = React.useState(false);
 
   const images = [
-    require("../../assets/images/slider1.png"),
-    require("../../assets/images/slider2.png"),
-    // Add more images as needed
+    require("@/assets/images/slider1.png"),
+    require("@/assets/images/slider2.png"), // Add more images as needed
   ];
 
   const dots = Array(images.length).fill(null);
+
+  const swipeX = new Animated.Value(0);
 
   // Function to handle the next image
   const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  // Function to handle the previous image
-  const prevImage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+  // Handle the swipe gesture
+  const panResponder = React.useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (e, gestureState) => {
+          swipeX.setValue(gestureState.dx); // Update swipeX with current gesture
+        },
+        onPanResponderRelease: (e, gestureState) => {
+          if (gestureState.dx > 50) {
+            nextImage(); // Move to the next image on right swipe
+          } else if (gestureState.dx < -50) {
+            setCurrentIndex((prevIndex) =>
+              prevIndex === 0 ? images.length - 1 : prevIndex - 1
+            ); // Move to the previous image on left swipe
+          }
+
+          Animated.spring(swipeX, {
+            toValue: 0,
+            useNativeDriver: true,
+          }).start(); // Reset swipeX position after release
+        },
+      }),
+    []
+  );
+
+  // Automatically swipe every 5 seconds when no swipe is detected
+  React.useEffect(() => {
+    if (!swiping) {
+      const interval = setInterval(() => {
+        nextImage();
+      }, 5000); // Change the image every 5 seconds
+
+      return () => clearInterval(interval); // Clear the interval when component unmounts or swiping occurs
+    }
+  }, [swiping]);
+
+  // Animated swipe effect for smooth transition between images
+  const animatedTranslateX = swipeX.interpolate({
+    inputRange: [-300, 0, 300],
+    outputRange: [-300, 0, 300],
+  });
 
   return (
     <View style={styles.heroContainer}>
       <View style={styles.heroContent}>
-        <Image source={images[currentIndex]} style={styles.image} />
+        <Animated.View
+          {...panResponder.panHandlers}
+          style={[styles.imageContainer, { transform: [{ translateX: animatedTranslateX }] }]}
+        >
+          <ImageBackground source={images[currentIndex]} style={styles.image} ></ImageBackground>
+        </Animated.View>
         <View style={styles.dotContainer}>
           {dots.map((_, index) => (
             <View
               key={index}
-              style={[
-                styles.dot,
-                currentIndex === index && styles.activeDot,
-              ]}
+              style={[styles.dot, currentIndex === index && styles.activeDot]}
             />
           ))}
-        </View>
-        <View style={styles.navigation}>
-          <TouchableOpacity onPress={prevImage} style={styles.navButton}>
-            <Text style={styles.navText}>{"<"}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={nextImage} style={styles.navButton}>
-            <Text style={styles.navText}>{">"}</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -67,9 +101,14 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "relative",
   },
-  image: {
+  imageContainer: {
+    width: "100%",
     height: 390,
-    width: 230,
+    borderRadius: 20,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
     borderRadius: 20,
   },
   dotContainer: {
@@ -88,23 +127,5 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: "#FF5733", // Active dot color
-  },
-  navigation: {
-    position: "absolute",
-    top: "50%",
-    left: 10,
-    right: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  navButton: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    padding: 10,
-    borderRadius: 30,
-  },
-  navText: {
-    color: "#FFF",
-    fontSize: 24,
   },
 });
