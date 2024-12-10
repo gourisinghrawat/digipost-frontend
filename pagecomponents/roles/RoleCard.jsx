@@ -1,17 +1,18 @@
 import * as React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
-import { ImageBackground } from "react-native-web";
+import { View, StyleSheet, Text, ImageBackground, TouchableOpacity } from "react-native";
 
-export const RoleCard = ({ title, description, imageUrl }) => {
+export const RoleCard = ({ title, description, imageUrl, onPress }) => {
   return (
-    <ImageBackground
-      resizeMode="cover"
-      fitContent
-      source={{ uri: imageUrl }}
-      style={styles.roleCardContainer}
-    >
-     
-    </ImageBackground>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+      <ImageBackground
+        resizeMode="cover"
+        source={{ uri: imageUrl }}
+        style={styles.roleCardContainer}
+      >
+        <View style={styles.overlay}>
+        </View>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 
