@@ -1,9 +1,9 @@
 import * as React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
-import { CircularButton } from "../../../pagecomponents/employeePortal/components/CircularButton";
-import { DotIndicator } from "../../../pagecomponents/employeePortal/components/DotIndicator";
-import { FeatureCard } from "../../../pagecomponents/employeePortal/components/FeatureCard";
-import { Header } from "../../../pagecomponents/Header";
+import { CircularButton } from "@/pagecomponents/employeePortal/components/CircularButton";
+import { DotIndicator } from "@/pagecomponents/employeePortal/components/DotIndicator";
+import { FeatureCard } from "@/pagecomponents/employeePortal/components/FeatureCard";
+import { Header } from "@/pagecomponents/Header";
 const navigationIcons = [
   { uri: "https://cdn.builder.io/api/v1/image/assets/...1" },
   { uri: "https://cdn.builder.io/api/v1/image/assets/...2" },

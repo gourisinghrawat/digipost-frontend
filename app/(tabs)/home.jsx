@@ -2,13 +2,13 @@ import { StyleSheet } from "react-native";
 import * as React from "react";
 import { ScrollView, View } from "react-native";
 
-import { Header } from "../../../pagecomponents/Header";
-import { HeroSection } from "../../../pagecomponents/homeScreen/HeroSection";
-import { SustainabilityCard } from "../../../pagecomponents/homeScreen/SustainabilityCard";
-import { ServiceGrid } from "../../../pagecomponents/homeScreen/ServiceGrid";
-import { DocumentSection } from "../../../pagecomponents/homeScreen/DocumentSection";
-import { FloatingActionButton } from "../../../pagecomponents/homeScreen/FloatingActionButton";
-import { BottomNavigation } from "../../../pagecomponents/homeScreen/BottomNavigation";
+import { Header } from "@/pagecomponents/Header";
+import { HeroSection } from "@/pagecomponents/homeScreen/HeroSection";
+import { SustainabilityCard } from "@/pagecomponents/homeScreen/SustainabilityCard";
+import { ServiceGrid } from "@/pagecomponents/homeScreen/ServiceGrid";
+import { DocumentSection } from "@/pagecomponents/homeScreen/DocumentSection";
+import { FloatingActionButton } from "@/pagecomponents/homeScreen/FloatingActionButton";
+import { BottomNavigation } from "@/pagecomponents/homeScreen/BottomNavigation";
 
 export default function HomeScreen() {
   return (
@@ -21,8 +21,9 @@ export default function HomeScreen() {
         <Header />
         <HeroSection />
         <SustainabilityCard />
-        <DocumentSection />
+        
         <ServiceGrid />
+        <DocumentSection />
         <FloatingActionButton />
       </ScrollView>
 

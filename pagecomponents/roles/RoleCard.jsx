@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, ImageBackground, TouchableOpacity } from "react-native";
 
 export const RoleCard = ({ title, description, imageUrl, onPress }) => {
+  
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
       <ImageBackground

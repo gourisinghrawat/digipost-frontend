@@ -1,7 +1,9 @@
 import * as React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { RoleCard } from "../../pagecomponents/roles/RoleCard";
-import { useNavigation } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
+import { Button } from "react-native-web";
+
 
 const roles = [
   {
@@ -16,7 +18,7 @@ const roles = [
     description: "Manager role description here.",
     imageUrl:
       "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/dea0914420463d927c61d07d737ae358d5db914e79f30422089b45c6f067523c?apiKey=0fe3c92d70f947bd8019826ed857d2fb&",
-    screen: "./(manager)/managerhome", // Screen to navigate to
+    screen: "./manager/managerhome", // Screen to navigate to
   },
   {
     title: "Citizen",
@@ -48,7 +50,13 @@ export default function RoleSelector() {
           <View style={styles.headerText}>
             <Text>Your Role</Text>
           </View>
+          
           <View style={styles.rolesGrid}>
+          <Button onPress={navigation.navigate('app/(tabs)/manager/managerhome.jsx')}>
+            <RoleCard imageUrl={roles[1].imageUrl}
+              
+            />
+          </Button>
             {roles.map((role, index) => (
               <RoleCard
                 key={index}

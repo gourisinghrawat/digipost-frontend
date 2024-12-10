@@ -8,7 +8,8 @@ export function HeroSection() {
 
   const images = [
     require("@/assets/images/slider1.png"),
-    require("@/assets/images/slider2.png"), // Add more images as needed
+    require("@/assets/images/slider2.png"),
+    require("@/assets/images/empofmonth.png"), // Add more images as needed
   ];
 
   const dots = Array(images.length).fill(null);
@@ -69,9 +70,11 @@ export function HeroSection() {
       <View style={styles.heroContent}>
         <Animated.View
           {...panResponder.panHandlers}
-          style={[styles.imageContainer, { transform: [{ translateX: animatedTranslateX }] }]}
-        >
-          <ImageBackground source={images[currentIndex]} style={styles.image} ></ImageBackground>
+          style={[styles.imageContainer, { transform: [{ translateX: animatedTranslateX }] }]}>
+          <Image
+            source={images[currentIndex]}
+            style={styles.image}
+          />
         </Animated.View>
         <View style={styles.dotContainer}>
           {dots.map((_, index) => (
@@ -103,13 +106,12 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    height: 390,
-    borderRadius: 20,
+    // No fixed height here
   },
   image: {
     width: "100%",
-    height: "100%",
-    borderRadius: 20,
+    height: undefined, // Let height adjust automatically based on aspect ratio
+    aspectRatio: 1.77, // This is an example ratio (16:9), adjust it to match your images' aspect ratio
   },
   dotContainer: {
     alignSelf: "center",

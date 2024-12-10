@@ -1,22 +1,22 @@
 import React from "react";
 import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
-import { IconButton } from "../../../pagecomponents/dashboard/components/IconButton";
-import { StatCard } from "../../../pagecomponents/dashboard/components/StatCard";
-import { Header } from "../../../pagecomponents/Header";
+import { IconButton } from "@/pagecomponents/dashboard/components/IconButton";
+import { StatCard } from "@/pagecomponents/dashboard/components/StatCard";
+import { Header } from "@/pagecomponents/Header";
 
 
 const statsData = [
-  { title: "Your Post Office Rank", value: "123" },
-  { title: "Upload Data", icon: require("../../../assets/images/upload.png") },
-  { title: "Carbon Footprint", icon: require("../../../assets/images/carbon.png") },
-  { title: "Localized Eco Solutions", icon: require("../../../assets/images/eco.png") },
+  { title: "Statastics", icon: require("@/assets/images/graph.png") },
+  { title: "Upload Data", icon: require("@/assets/images/upload.png") },
+  { title: "Carbon Footprint", icon: require("@/assets/images/carbon.png") },
+  { title: "Localized Eco Solutions", icon: require("@/assets/images/eco.png") },
 ];
 
 const bottomNavIcons = [
-  { source: require("../../../assets/icons/mapicon.png") },
-  { source: require("../../../assets/icons/mapicon.png") },
-  { source: require("../../../assets/icons/mapicon.png") },
-  { source: require("../../../assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
 ];
 
 export default function DashboardScreen() {
@@ -45,7 +45,7 @@ export default function DashboardScreen() {
 
       <View style={styles.floatingButton}>
         <View style={styles.floatingButtonInner}>
-          <IconButton source={require("../../../assets/images/logo.png")} size={24} />
+          <IconButton source={require("@/assets/images/logo.png")} size={24} />
         </View>
       </View>
 
