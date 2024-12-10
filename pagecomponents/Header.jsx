@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     gap: "40px 100px",
     justifyContent: "space-between",
     flexDirection: "row",
+    backgroundColor: "#EEC200"
   },
   logo: {
     alignSelf: "stretch",

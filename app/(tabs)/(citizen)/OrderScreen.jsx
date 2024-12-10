@@ -1,9 +1,9 @@
 import * as React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import { HeaderIcons } from "../../pagecomponents/orders/components/HeaderIcons";
-import { NavigationBar } from "../../pagecomponents/orders/components/NavigationBar";
-import { OrderDetails } from "../../pagecomponents/orders/components/OrderDetails";
-import { SustainabilityNotice } from "../../pagecomponents/orders/components/SustainabilityNotice";
+import { HeaderIcons } from "@/pagecomponents/orders/components/HeaderIcons";
+import { NavigationBar } from "@/pagecomponents/orders/components/NavigationBar";
+import { OrderDetails } from "@/pagecomponents/orders/components/OrderDetails";
+import { SustainabilityNotice } from "@/pagecomponents/orders/components/SustainabilityNotice";
 
 export default function OrderScreen() {
   return (

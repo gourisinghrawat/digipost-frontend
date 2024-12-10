@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: "40px 100px",
     justifyContent: "space-between",
+    backgroundColor: "#FFD700", // Add this line for yellow background
   },
   logo: {
     alignSelf: "stretch",
@@ -85,5 +86,6 @@ const styles = StyleSheet.create({
     aspectRatio: "1",
   },
 });
+
 
 export default Header;

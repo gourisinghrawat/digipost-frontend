@@ -1,44 +1,28 @@
 import React from "react";
 import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
-import { IconButton } from "../../pagecomponents/dashboard/components/IconButton";
-import { StatCard } from "../../pagecomponents/dashboard/components/StatCard";
+import { IconButton } from "../../../pagecomponents/dashboard/components/IconButton";
+import { StatCard } from "../../../pagecomponents/dashboard/components/StatCard";
+import { Header } from "../../../pagecomponents/Header";
 
-const navigationIcons = [
-  { source: require("../../assets/icons/mapicon.png") },
-  { source: require("../../assets/icons/mapicon.png") },
-  { source: require("../../assets/icons/mapicon.png") },
-  { source: require("../../assets/icons/mapicon.png") },
-];
 
 const statsData = [
   { title: "Your Post Office Rank", value: "123" },
-  { title: "Upload Data", icon: require("../../assets/images/upload.png") },
-  { title: "Carbon Footprint", icon: require("../../assets/images/carbon.png") },
-  { title: "Localized Eco Solutions", icon: require("../../assets/images/eco.png") },
+  { title: "Upload Data", icon: require("../../../assets/images/upload.png") },
+  { title: "Carbon Footprint", icon: require("../../../assets/images/carbon.png") },
+  { title: "Localized Eco Solutions", icon: require("../../../assets/images/eco.png") },
 ];
 
 const bottomNavIcons = [
-  { source: require("../../assets/icons/mapicon.png") },
-  { source: require("../../assets/icons/mapicon.png") },
-  { source: require("../../assets/icons/mapicon.png") },
-  { source: require("../../assets/icons/mapicon.png") },
+  { source: require("../../../assets/icons/mapicon.png") },
+  { source: require("../../../assets/icons/mapicon.png") },
+  { source: require("../../../assets/icons/mapicon.png") },
+  { source: require("../../../assets/icons/mapicon.png") },
 ];
 
 export default function DashboardScreen() {
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/images/logo.png")}
-          resizeMode="contain"
-        />
-        <View style={styles.navigationIcons}>
-          {navigationIcons.map((icon, index) => (
-            <IconButton key={index} {...icon} />
-          ))}
-        </View>
-      </View>
+      <Header/>
 
       <View style={styles.profileSection}>
         <View style={styles.profileBanner}>
@@ -61,7 +45,7 @@ export default function DashboardScreen() {
 
       <View style={styles.floatingButton}>
         <View style={styles.floatingButtonInner}>
-          <IconButton source={require("../../assets/images/logo.png")} size={24} />
+          <IconButton source={require("../../../assets/images/logo.png")} size={24} />
         </View>
       </View>
 

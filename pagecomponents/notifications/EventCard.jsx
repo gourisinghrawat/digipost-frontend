@@ -1,15 +1,19 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 
-export const EventCard = ({ title, description }) => {
+export const EventCard = ({ title, description, backgroundImage }) => {
   return (
-    <View style={styles.eventContainer}>
+    <ImageBackground
+      source={typeof backgroundImage === "string" ? { uri: backgroundImage } : backgroundImage}
+      style={styles.eventContainer}
+      imageStyle={styles.backgroundImage} // Customize image style if needed
+    >
       <View style={styles.eventHeader}>
         <Text style={styles.eventTitle}>{title}</Text>
         <Text style={styles.registerButton}>Register Now</Text>
       </View>
       <Text style={styles.eventDescription}>{description}</Text>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -20,6 +24,10 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
     paddingTop: 78,
+    overflow: "hidden",
+  },
+  backgroundImage: {
+    borderRadius: 20,
   },
   eventHeader: {
     flexDirection: "row",
@@ -38,6 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     paddingHorizontal: 10,
     paddingVertical: 4,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   eventDescription: {
     color: "#FFF",

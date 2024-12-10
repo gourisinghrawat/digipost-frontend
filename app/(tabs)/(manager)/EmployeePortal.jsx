@@ -1,10 +1,9 @@
 import * as React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
-import { CircularButton } from "../../pagecomponents/employeePortal/components/CircularButton";
-import { NavigationIcon } from "../../pagecomponents/employeePortal/components/NavigationIcon";
-import { DotIndicator } from "../../pagecomponents/employeePortal/components/DotIndicator";
-import { FeatureCard } from "../../pagecomponents/employeePortal/components/FeatureCard";
-
+import { CircularButton } from "../../../pagecomponents/employeePortal/components/CircularButton";
+import { DotIndicator } from "../../../pagecomponents/employeePortal/components/DotIndicator";
+import { FeatureCard } from "../../../pagecomponents/employeePortal/components/FeatureCard";
+import { Header } from "../../../pagecomponents/Header";
 const navigationIcons = [
   { uri: "https://cdn.builder.io/api/v1/image/assets/...1" },
   { uri: "https://cdn.builder.io/api/v1/image/assets/...2" },
@@ -22,21 +21,7 @@ const bottomNavIcons = [
 export default function EmployeePortal() {
   return (
     <View style={styles.container}>
-      {/* Header Section */}
-      <View style={styles.header}>
-        <Image
-          resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/...logo",
-          }}
-          style={styles.logo}
-        />
-        <View style={styles.navigationIcons}>
-          {navigationIcons.map((icon, index) => (
-            <NavigationIcon key={index} source={icon} />
-          ))}
-        </View>
-      </View>
+      <Header/>
 
       {/* Main Content */}
       <View style={styles.mainContent}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import EmployeeCard from "../../pagecomponents/employeeTracker/components/EmployeeCard";
-import NavigationIcon from "../../pagecomponents/employeeTracker/components/NavigationIcon";
+import EmployeeCard from "../../../pagecomponents/employeeTracker/components/EmployeeCard";
+import NavigationIcon from "../../../pagecomponents/employeeTracker/components/NavigationIcon";
 
 const employeeData = [
   {

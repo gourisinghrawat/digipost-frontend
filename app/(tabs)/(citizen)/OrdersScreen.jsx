@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import OrderCard from "../../pagecomponents/orders/OrderCard";
-import NavigationIcon from "../../pagecomponents/orders/NavigationIcon";
+import OrderCard from "../../../pagecomponents/orders/OrderCard";
+import NavigationIcon from "../../../pagecomponents/orders/NavigationIcon";
 
 const orderData = [
   {

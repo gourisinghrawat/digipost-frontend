@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { NotificationItem } from "../../pagecomponents/notifications/NotificationItem";
 import { EventCard } from "../../pagecomponents/notifications/EventCard";
 import { NavigationIcon } from "../../pagecomponents/notifications/NavigationIcon";
-
+import { Header } from "../../pagecomponents/Header";
 const notifications = [
   {
     icon: "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/912d33a20f65b2f0bcd2ea0afd2a899ecc102667e01485ceeb44bc013acebb0e?apiKey=0fe3c92d70f947bd8019826ed857d2fb&",
@@ -36,13 +36,16 @@ const events = [
     title: "Plantation drive",
     description:
       "Lorem ipsum dolor sit amet consectetur. In diam condimentum vitae mauris lorem. Turpis mi sit egestas viverra odio et. Blandit eget ultrices integer risus. Sed nisi nibh id ullamcorper nulla risus diam tempor.",
+    backgroundImage: require("../../assets/images/recycle even.png"),
   },
   {
     title: "Write letter to freedom fighters",
     description:
       "Lorem ipsum dolor sit amet consectetur. In diam condimentum vitae mauris lorem. Turpis mi sit egestas viverra odio et. Blandit eget ultrices integer risus. Sed nisi nibh id ullamcorper nulla risus diam tempor.",
+    backgroundImage: require("../../assets/images/recycle even.png"),
   },
 ];
+
 
 const navigationIcons = [
   "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/c7391fd78daa05433d21d83cf789b63f228fd67cf14d9e81531f2c0517ed842e?apiKey=0fe3c92d70f947bd8019826ed857d2fb&",
@@ -55,25 +58,7 @@ const navigationIcons = [
 export default function NotificationsScreen() {
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/358b848687af257d9afef9e80b28f819061e85c5e299a2be191bdb8591268554?apiKey=0fe3c92d70f947bd8019826ed857d2fb&",
-          }}
-          style={styles.logo}
-        />
-        <View style={styles.headerIcons}>
-          {["ext_2-", "ext_3-", "ext_4-", "ext_5-"].map((icon, index) => (
-            <Image
-              key={index}
-              resizeMode="contain"
-              source={{ uri: `http://b.io/${icon}` }}
-              style={styles.headerIcon}
-            />
-          ))}
-        </View>
-      </View>
+      <Header/>
 
       <View style={styles.mainContent}>
         <View style={styles.notificationsHeader}>
@@ -94,8 +79,13 @@ export default function NotificationsScreen() {
         <View style={styles.eventsSection}>
           <Text style={styles.sectionTitle}>Current Events</Text>
           {events.map((event, index) => (
-            <EventCard key={index} {...event} />
-          ))}
+    <EventCard
+      key={index}
+      title={event.title}
+      description={event.description}
+      backgroundImage={event.backgroundImage}
+    />
+  ))}
         </View>
       </View>
 
