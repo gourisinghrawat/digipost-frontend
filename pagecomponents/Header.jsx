@@ -1,5 +1,6 @@
 import * as React from "react";
 import { View, Image, StyleSheet } from "react-native";
+import { Button } from "react-native-web";
 
 export function Header() {
   return (
@@ -33,6 +34,7 @@ export function Header() {
           }}
           style={styles.icon}
         />
+        
         <Image
           resizeMode="contain"
           source={{
@@ -40,6 +42,12 @@ export function Header() {
           }}
           style={styles.profileIcon}
         />
+        {/* <Button onPress={}><Image
+          resizeMode="contain"
+          source={require("../assets/icons/exit.png")
+          } */}
+          {/* style={styles.profileIcon}
+        /></Button> */}
       </View>
     </View>
   );

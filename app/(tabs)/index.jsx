@@ -18,14 +18,14 @@ const roles = [
     description: "Manager role description here.",
     imageUrl:
       "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/dea0914420463d927c61d07d737ae358d5db914e79f30422089b45c6f067523c?apiKey=0fe3c92d70f947bd8019826ed857d2fb&",
-    screen: "./manager/managerhome", // Screen to navigate to
+    screen: "ManagerSignIn", // Screen to navigate to
   },
   {
     title: "Citizen",
     description: "Citizen role description here.",
     imageUrl:
       "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/e5057d2a39205abdac6634e3067691b6976c2acd7515b0e29a85caf9e9a552d9?apiKey=0fe3c92d70f947bd8019826ed857d2fb&",
-    screen: "./citizen/home", // Screen to navigate to
+    screen: "CitizenAuth", // Screen to navigate to
   },
   {
     title: "Go to Website",
@@ -52,11 +52,7 @@ export default function RoleSelector() {
           </View>
           
           <View style={styles.rolesGrid}>
-          <Button onPress={navigation.navigate('app/(tabs)/manager/managerhome.jsx')}>
-            <RoleCard imageUrl={roles[1].imageUrl}
-              
-            />
-          </Button>
+          
             {roles.map((role, index) => (
               <RoleCard
                 key={index}
