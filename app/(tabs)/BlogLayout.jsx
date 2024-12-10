@@ -10,8 +10,7 @@ function BlogLayout() {
     <View style={styles.container}>
       <Header />
       <BlogContent />
-      <ShareButton />
-      <SocialLinks />
+      
     </View>
   );
 }
