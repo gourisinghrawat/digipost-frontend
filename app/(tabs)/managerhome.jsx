@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { IconButton } from "@/pagecomponents/dashboard/components/IconButton";
 import { StatCard } from "@/pagecomponents/dashboard/components/StatCard";
 import { Header } from "@/pagecomponents/Header";
+import { usePostOffice } from "@/context/PostOfficeContext";
 
 
 const statsData = [
@@ -20,6 +21,17 @@ const bottomNavIcons = [
 ];
 
 export default function DashboardScreen() {
+  const { postOfficeId, postOfficeData } = usePostOffice();
+
+  useEffect(() => {
+    if (postOfficeData) {
+      console.log('Post Office Data:', postOfficeData);
+      console.log('Post Office ID:', postOfficeId);
+    }
+    else{
+      console.log('No post office data found');
+    }
+  }, [postOfficeData]);
   return (
     <ScrollView style={styles.container}>
       <Header/>
