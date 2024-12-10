@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { auth, database } from '@/constants/firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { ref, orderByChild, query, equalTo, get } from "firebase/database";
+import { ref, set,orderByChild, query, equalTo, get } from "firebase/database";
 
 export default function ManagerSignIn() {
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function ManagerSignIn() {
       const postOfficeRef = query(
         ref(database, 'postofficesdata'),
         orderByChild('Post_Office_ID'),
-        equalTo(postOfficeId.trim())
+        equalTo(Number(postOfficeId.trim()))
       );
       const snapshot = await get(postOfficeRef);
   
@@ -32,6 +32,7 @@ export default function ManagerSignIn() {
           postOfficeId,
         });
         alert('Manager signed in successfully!');
+        navigation.navigate('managerhome');
       } else {
         console.log('Post Office ID not found, but here is the full record fetched:');
         const allDataSnapshot = await get(ref(database, 'postofficesdata'));
