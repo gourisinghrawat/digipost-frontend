@@ -1,17 +1,14 @@
 import * as React from "react";
 import { useState } from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import PlantItem from "./PlantItem";
 
-const plantData = [
-  { id: 1, name: "Spider Plant" },
-  { id: 2, name: "Spider Plant" },
-  { id: 3, name: "Spider Plant" },
-];
-
 function PlantSuggestionCard({ pdata }) {
-  // Split the pdata string into an array of words, assuming words are separated by spaces
+  // Split the pdata string into an array of words, assuming words are separated by commas
   const plantsFromData = pdata ? pdata.split(",") : [];
+
+  // State to toggle visibility of the plant list
+  const [isPlantListVisible, setIsPlantListVisible] = useState(false);
 
   return (
     <View style={styles.cardContainer}>
@@ -26,7 +23,10 @@ function PlantSuggestionCard({ pdata }) {
               style={styles.avatarImage}
             />
           </View>
-          <View style={styles.titleContainer}>
+          <TouchableOpacity
+            onPress={() => setIsPlantListVisible(!isPlantListVisible)}
+            style={styles.titleContainer}
+          >
             <View style={styles.titleWrapper}>
               <Text>{"Plants Suggestions"}</Text>
             </View>
@@ -37,15 +37,17 @@ function PlantSuggestionCard({ pdata }) {
               }}
               style={styles.iconImage}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.plantListContainer}>
-        {/* Map over the plantsFromData to dynamically render PlantItem components */}
-        {plantsFromData.map((plantName, index) => (
-          <PlantItem key={index} name={plantName} />
-        ))}
-      </View>
+      {isPlantListVisible && (
+        <View style={styles.plantListContainer}>
+          {/* Map over the plantsFromData to dynamically render PlantItem components */}
+          {plantsFromData.map((plantName, index) => (
+            <PlantItem key={index} name={plantName} />
+          ))}
+        </View>
+      )}
     </View>
   );
 }
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#4CAF50", // This is where the color is applied
   },
   contentWrapper: {
     display: "flex",

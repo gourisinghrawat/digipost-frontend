@@ -1,13 +1,18 @@
 import React, {useEffect,useState} from "react";
 import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
-import { StatCard } from "../../pagecomponents/postOffice/components/StatCard";
+import { IconButton } from "@/pagecomponents/dashboard/components/IconButton";
+import { StatCard } from "@/pagecomponents/dashboard/components/StatCard";
 import { Header } from "@/pagecomponents/Header";
 import { usePostOffice } from "@/context/PostOfficeContext";
 import { database } from "@/constants/firebase";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
-import {HeroSection} from "@/pagecomponents/homeScreen/HeroSection";
-import PlantSuggestionCard from "../../pagecomponents/postOffice/components/PlantSuggestionCard";
 
+const statsData = [
+  { title: "Statastics", icon: require("@/assets/images/graph.png") },
+  { title: "Upload Data", icon: require("@/assets/images/upload.png") },
+  { title: "Carbon Footprint", icon: require("@/assets/images/carbon.png") },
+  { title: "Localized Eco Solutions", icon: require("@/assets/images/eco.png") },
+];
 
 
 
@@ -46,6 +51,7 @@ const getrecordforsolutions = async (regionvalue, typevalue) => {
     return null;
   }
 };
+  
 
 
     // const postOfficeRef = query(
@@ -115,6 +121,16 @@ const getRecordByAQI = async (aqiValue) => {
 };
 
 
+
+
+
+const bottomNavIcons = [
+  { source: require("@/assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
+  { source: require("@/assets/icons/mapicon.png") },
+];
+
 export default function DashboardScreen() {
   const { postOfficeId, postOfficeData } = usePostOffice();
   const [rankValue, setRankValue] = useState(null);
@@ -164,7 +180,7 @@ export default function DashboardScreen() {
       console.log(AQI)
       const extractedFields = Object.entries(nestedData).reduce((acc, [key, value]) => {
         acc[key] = value;
-        console.log(`${key}: ${value}`);
+        console.log(${key}: ${value});
         return acc;
       }, {});
 
@@ -197,6 +213,7 @@ export default function DashboardScreen() {
       console.log(region);
       const solutions = await getrecordforsolutions(region,type);
       if (solutions) {
+        console.log(9);
         setsuggestedsolutions(solutions);
       }
     };
@@ -206,104 +223,120 @@ export default function DashboardScreen() {
     }
   }, [region,type]);
   
-
   return (
-
 
     <ScrollView style={styles.container}>
       <Header/>
-  
-      <HeroSection/>
-      <View style={styles.mainContent}>
-        {/* <View style={styles.titleSection}>
-          <Text style={styles.titleText}>
-            #1 Rank{"\n"}
-            Indore Post Office:{"\n"}
-            Leading the Way in Sustainability
+
+      <View style={styles.profileSection}>
+        <View style={styles.profileBanner}>
+          <Text style={styles.profileText}>
+            gopal Verma{"\n"}was employee{"\n"}of the month
           </Text>
-          <View style={styles.dotIndicators}>
-            {[...Array(6)].map((_, index) => (
-              <View key={index} style={styles.dot} />
-            ))}
-          </View>
-        </View> */}
-  
-        <View style={styles.statsContainer}>
-        <StatCard icon={require("../../assets/images/trophy.png")}
-          value={rankValue}
-          label={"Rank"}
-        />
-        <StatCard icon={require("../../assets/images/coin.png")}
-          value={Math.floor(score)}
-          label={"Score"}
-        />
-        <StatCard icon={require("../../assets/images/aqi.png")}
-          value={AQI}
-          label={"AQI"}
-        />
-          
+          <Text style={styles.profileText}>
+            {suggestedsolutions.Region}
+          </Text>
+          <View style={styles.rankContainer}>
+          <Text style={styles.rankText}>
+              Rank: {rankValue}
+            </Text>
+            </View>
+            <View style={styles.rankContainer}>
+          <Text style={styles.rankText}>
+              Score: {score}
+            </Text>
+            </View>
+
+            <View style={styles.rankContainer}>
+          <Text style={styles.rankText}>
+              AQI: {AQI}
+            </Text>
+            </View>
+
+            
+
         </View>
-  
-        <View style={styles.suggestionsContainer}>
-        <PlantSuggestionCard pdata={suggestedplants}/><PlantSuggestionCard/><PlantSuggestionCard/>
+        <View style={styles.dotIndicators}>
+          {[...Array(6)].map((_, index) => (
+            <View key={index} style={styles.dot} />
+          ))}
         </View>
+      </View>
+      <Header/>
+      <View style={styles.statsGrid}>
+        {statsData.map((stat, index) => (
+          <StatCard key={index} {...stat} />
+        ))}
+      </View>
+
+      <View style={styles.floatingButton}>
+        <View style={styles.floatingButtonInner}>
+          <IconButton source={require("@/assets/images/logo.png")} size={24} />
+        </View>
+      </View>
+
+      <View style={styles.bottomNav}>
+        {bottomNavIcons.map((icon, index) => (
+          <IconButton key={index} {...icon} size={30} />
+        ))}
       </View>
       
       <View style={styles.suggestedPlantsCard}>
         <Text style={styles.suggestedPlantsTitle}>Suggested Plants</Text>
         <Text style={styles.suggestedPlantsText}>{suggestedplants}</Text>
       </View>
-      <Text>
-        {suggestedsolutions?.Community_Engagement}
-      </Text>
+
+      <View style={styles.suggestedPlantsCard}>
+        <Text style={styles.suggestedPlantsTitle}>Suggested Solutions</Text>
+        <Text style={styles.suggestedPlantsTitle}>{}</Text>
+        
+        </View>
     </ScrollView>
   );
-  
-  }
-  
-  
-  const styles = StyleSheet.create({
-  screenContainer: {
+}
+
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
-    marginLeft: "auto",
-    marginRight: "auto",
-    maxWidth: 480,
-    width: "100%",
+    backgroundColor: "#fff",
   },
   header: {
     flexDirection: "row",
-    padding: 10,
-    alignItems: "center",
     justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+  },
+  rankText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   logo: {
     width: 67,
     height: 40,
   },
-  headerIcons: {
+  navigationIcons: {
     flexDirection: "row",
     alignItems: "center",
     gap: 23,
   },
-  mainContent: {
-    height: 714,
-    alignItems: "center",
-  },
-  titleSection: {
+  profileSection: {
     width: "100%",
-    alignItems: "center",
   },
-  titleText: {
+  profileBanner: {
+    aspectRatio: 1.69,
     padding: 24,
-    paddingTop: 71,
-    paddingBottom: 32,
-    fontFamily: "Roboto",
-    fontSize: 19,
-    color: "#250000",
+    paddingTop: 99,
+    backgroundColor: "#000",
+  },
+  profileText: {
+    fontFamily: "Roboto, sans-serif",
+    fontSize: 23,
+    color: "#EEE",
     fontWeight: "700",
   },
   dotIndicators: {
     flexDirection: "row",
+    justifyContent: "center",
     gap: 5,
     marginTop: 10,
   },
@@ -311,30 +344,26 @@ export default function DashboardScreen() {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "#000",
   },
-  statsContainer: {
+  statsGrid: {
     flexDirection: "row",
-    gap: 30,
-    padding: 20,
-    marginTop: 10,
-    borderRadius: 10,
-    backgroundColor: "#F5F5F5",
-  },
-  suggestionsContainer: {
-    width: "100%",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 10,
     padding: 10,
-    gap: 10
-
+    marginTop: 10,
   },
-  fabContainer: {
+  floatingButton: {
     position: "absolute",
-    bottom: 84,
+    bottom: 70,
     alignSelf: "center",
+    zIndex: 10,
   },
-  fab: {
-    backgroundColor: "#FFFFFF",
-    elevation: 4,
+  floatingButtonInner: {
+    backgroundColor: "#fff",
+    borderRadius: 30,
+    elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -342,12 +371,14 @@ export default function DashboardScreen() {
   },
   bottomNav: {
     flexDirection: "row",
+    justifyContent: "space-between",
     padding: 20,
     paddingTop: 10,
     paddingBottom: 10,
-    justifyContent: "space-between",
   },
-  bottomNavIcon: {
-    width: 50,
+  rankContainer: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    borderRadius: 5,
   },
-  });
+});
