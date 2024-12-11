@@ -1,6 +1,8 @@
 #electricity
 import pytesseract
-pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+#pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+pytesseract.pytesseract.tesseract_cmd = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+
 from PIL import Image, ImageEnhance, ImageFilter
 import re
 from fuzzywuzzy import fuzz, process

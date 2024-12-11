@@ -4,7 +4,9 @@ from PIL import Image, ImageEnhance, ImageFilter
 import re
 
 # Set up Tesseract path (update if necessary)
-pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+#pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+pytesseract.pytesseract.tesseract_cmd = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+
 
 # Step 1: Preprocess and Extract Text
 def preprocess_and_extract_text(image_path):
@@ -59,28 +61,28 @@ def parse_water_bill_details(text):
    
     return details
 
-# Step 3: Main Function
-def main():
-    image_path = "data/water_bill_2.png"  # Path to the bill image
+# # Step 3: Main Function
+# def main():
+#     image_path = "data/water_bill_2.png"  # Path to the bill image
 
-    # Preprocess and extract text
-    extracted_text = preprocess_and_extract_text(image_path)
-    if not extracted_text:
-        print("Failed to extract text from the image.")
-        return
+#     # Preprocess and extract text
+#     extracted_text = preprocess_and_extract_text(image_path)
+#     if not extracted_text:
+#         print("Failed to extract text from the image.")
+#         return
 
-    # Print extracted text for debugging
-    # print("Extracted Text:")
-    # print(extracted_text)
+#     # Print extracted text for debugging
+#     # print("Extracted Text:")
+#     # print(extracted_text)
 
-    # Parse bill details
-    bill_details = parse_water_bill_details(extracted_text)
+#     # Parse bill details
+#     bill_details = parse_water_bill_details(extracted_text)
 
-    # Display parsed details
-    print("\nExtracted Water Bill Details:")
-    for key, value in bill_details.items():
-        print(f"{key}: {value}")
+#     # Display parsed details
+#     print("\nExtracted Water Bill Details:")
+#     for key, value in bill_details.items():
+#         print(f"{key}: {value}")
 
-# Run the script
-if __name__ == "__main__":
-    main()
+# # Run the script
+# if __name__ == "__main__":
+#     main()
