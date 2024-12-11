@@ -1,11 +1,13 @@
 import React, {useEffect,useState} from "react";
 import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { IconButton } from "@/pagecomponents/dashboard/components/IconButton";
-import { StatCard } from "@/pagecomponents/dashboard/components/StatCard";
+import { StatCard } from "../../pagecomponents/postOffice/components/StatCard";
 import { Header } from "@/pagecomponents/Header";
 import { usePostOffice } from "@/context/PostOfficeContext";
 import { database } from "@/constants/firebase";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
+import {HeroSection} from "@/pagecomponents/homeScreen/HeroSection";
+import PlantSuggestionCard from "../../pagecomponents/postOffice/components/PlantSuggestionCard";
 
 const statsData = [
   { title: "Statastics", icon: require("@/assets/images/graph.png") },
@@ -14,7 +16,17 @@ const statsData = [
   { title: "Localized Eco Solutions", icon: require("@/assets/images/eco.png") },
 ];
 
+const stats = [
+  { icon: require("../../assets/images/trophy.png"), value: "123.78", label: "Rank" },
+  { icon: require("../../assets/images/coin.png"), value: "123.78", label: "Score" },
+  { icon: require("../../assets/images/aqi.png"), value: "123.78", label: "Aqi" },
+];
 
+const plantSuggestions = [
+  { icon: require("../../assets/images/plant.png"), title: "Spider Plant" },
+  { icon: require("../../assets/images/plant.png"), title: "Spider Plant" },
+  { icon: require("../../assets/images/plant.png"), title: "Spider Plant" },
+];
 
 const getrecordforsolutions = async (regionvalue, typevalue) => {
   try {
@@ -119,16 +131,6 @@ const getRecordByAQI = async (aqiValue) => {
 };
 
 
-
-
-
-const bottomNavIcons = [
-  { source: require("@/assets/icons/mapicon.png") },
-  { source: require("@/assets/icons/mapicon.png") },
-  { source: require("@/assets/icons/mapicon.png") },
-  { source: require("@/assets/icons/mapicon.png") },
-];
-
 export default function DashboardScreen() {
   const { postOfficeId, postOfficeData } = usePostOffice();
   const [rankValue, setRankValue] = useState(null);
@@ -138,8 +140,6 @@ export default function DashboardScreen() {
   const [region, setregion]=useState(null);
   const [type, settype]=useState(null);
   const [suggestedsolutions, setsuggestedsolutions]=useState(null);
-  const [solutionrecord, setsolutionrecord]=useState(null);
-
 
 
   useEffect(() => {
@@ -213,13 +213,7 @@ export default function DashboardScreen() {
       console.log(region);
       const solutions = await getrecordforsolutions(region,type);
       if (solutions) {
-        console.log(solutions);
         setsuggestedsolutions(solutions);
-        console.log(suggestedsolutions);
-        console.log(4);
-        const [key, record] = Object.entries(suggestedsolutions)[0];
-        renderTable(record);
-
       }
     };
   
@@ -228,163 +222,101 @@ export default function DashboardScreen() {
     }
   }, [region,type]);
   
-  
-
-
-  const renderTable = (record) => {
-    return (
-      <View style={styles.tableContainer}>
-        <Text style={styles.tableHeader}>Fuel Usage Solutions</Text>
-        <Text style={styles.tableRow}>{record.Fuel_Usage_Solutions}</Text>
-        
-        <Text style={styles.tableHeader}>Community Engagement Actvities</Text>
-        <Text style={styles.tableRow}>{record.Community_Engagement}</Text>
-
-        <Text style={styles.tableHeader}>General Infrastrcture</Text>
-        <Text style={styles.tableRow}>{record.General_Infrastructure_Checklist}</Text>
-        
-        <Text style={styles.tableHeader}>Water Usage Solutions</Text>
-        <Text style={styles.tableRow}>{record.Water_Usage_Solutions}</Text>
-        
-        <Text style={styles.tableHeader}>Energy Solutions</Text>
-        <Text style={styles.tableRow}>{record.Energy_Usage_Solutions}</Text>
-        
-      </View>
-    );
-  };
-
 
   return (
 
+
     <ScrollView style={styles.container}>
       <Header/>
-
-      <View style={styles.profileSection}>
-        <View style={styles.profileBanner}>
-          <Text style={styles.profileText}>
-            gopal Verma{"\n"}was employee{"\n"}of the month
+  
+      <HeroSection/>
+      <View style={styles.mainContent}>
+        {/* <View style={styles.titleSection}>
+          <Text style={styles.titleText}>
+            #1 Rank{"\n"}
+            Indore Post Office:{"\n"}
+            Leading the Way in Sustainability
           </Text>
-          <View style={styles.rankContainer}>
-          <Text style={styles.rankText}>
-              Rank: {rankValue}
-            </Text>
-            </View>
-            <View style={styles.rankContainer}>
-          <Text style={styles.rankText}>
-              Score: {score}
-            </Text>
-            </View>
-
-            <View style={styles.rankContainer}>
-          <Text style={styles.rankText}>
-              AQI: {AQI}
-            </Text>
-            </View>
-
-            
-
+          <View style={styles.dotIndicators}>
+            {[...Array(6)].map((_, index) => (
+              <View key={index} style={styles.dot} />
+            ))}
+          </View>
+        </View> */}
+  
+        <View style={styles.statsContainer}>
+        <StatCard icon={require("../../assets/images/trophy.png")}
+          value={rankValue}
+          label={"Rank"}
+        />
+        <StatCard icon={require("../../assets/images/coin.png")}
+          value={Math.floor(score)}
+          label={"Score"}
+        />
+        <StatCard icon={require("../../assets/images/aqi.png")}
+          value={AQI}
+          label={"AQI"}
+        />
+          
         </View>
-        <View style={styles.dotIndicators}>
-          {[...Array(6)].map((_, index) => (
-            <View key={index} style={styles.dot} />
-          ))}
+  
+        <View style={styles.suggestionsContainer}>
+        <PlantSuggestionCard pdata={suggestedplants}/><PlantSuggestionCard/><PlantSuggestionCard/>
         </View>
-      </View>
-      <Header/>
-      <View style={styles.statsGrid}>
-        {statsData.map((stat, index) => (
-          <StatCard key={index} {...stat} />
-        ))}
-      </View>
-
-      <View style={styles.floatingButton}>
-        <View style={styles.floatingButtonInner}>
-          <IconButton source={require("@/assets/images/logo.png")} size={24} />
-        </View>
-      </View>
-
-      <View style={styles.bottomNav}>
-        {bottomNavIcons.map((icon, index) => (
-          <IconButton key={index} {...icon} size={30} />
-        ))}
       </View>
       
       <View style={styles.suggestedPlantsCard}>
         <Text style={styles.suggestedPlantsTitle}>Suggested Plants</Text>
         <Text style={styles.suggestedPlantsText}>{suggestedplants}</Text>
       </View>
-
-      <Text style={styles.title}>Suggested Solutions</Text>
-      {Object.keys(suggestedsolutions).length > 0 && renderTable(suggestedsolutions[Object.keys(suggestedsolutions)[0]])}
-
-
-
-
     </ScrollView>
   );
-}
-
-const styles = StyleSheet.create({
-  tableContainer: {
-    marginTop: 20,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 10,
-    backgroundColor: '#f9f9f9',
-  },
-  tableHeader: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#333',
-  },
-  tableRow: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: '#555',
-  },
-  container: {
+  
+  }
+  
+  
+  const styles = StyleSheet.create({
+  screenContainer: {
     flex: 1,
-    backgroundColor: "#fff",
+    marginLeft: "auto",
+    marginRight: "auto",
+    maxWidth: 480,
+    width: "100%",
   },
   header: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     padding: 10,
-  },
-  rankText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   logo: {
     width: 67,
     height: 40,
   },
-  navigationIcons: {
+  headerIcons: {
     flexDirection: "row",
     alignItems: "center",
     gap: 23,
   },
-  profileSection: {
+  mainContent: {
+    height: 714,
+    alignItems: "center",
+  },
+  titleSection: {
     width: "100%",
+    alignItems: "center",
   },
-  profileBanner: {
-    aspectRatio: 1.69,
+  titleText: {
     padding: 24,
-    paddingTop: 99,
-    backgroundColor: "#000",
-  },
-  profileText: {
-    fontFamily: "Roboto, sans-serif",
-    fontSize: 23,
-    color: "#EEE",
+    paddingTop: 71,
+    paddingBottom: 32,
+    fontFamily: "Roboto",
+    fontSize: 19,
+    color: "#250000",
     fontWeight: "700",
   },
   dotIndicators: {
     flexDirection: "row",
-    justifyContent: "center",
     gap: 5,
     marginTop: 10,
   },
@@ -392,26 +324,28 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#000",
+    backgroundColor: "#D9D9D9",
   },
-  statsGrid: {
+  statsContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: 10,
-    padding: 10,
+    gap: 30,
+    padding: 20,
     marginTop: 10,
+    borderRadius: 10,
+    backgroundColor: "#F5F5F5",
   },
-  floatingButton: {
+  suggestionsContainer: {
+    width: "100%",
+    padding: 10,
+  },
+  fabContainer: {
     position: "absolute",
-    bottom: 70,
+    bottom: 84,
     alignSelf: "center",
-    zIndex: 10,
   },
-  floatingButtonInner: {
-    backgroundColor: "#fff",
-    borderRadius: 30,
-    elevation: 5,
+  fab: {
+    backgroundColor: "#FFFFFF",
+    elevation: 4,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -419,14 +353,12 @@ const styles = StyleSheet.create({
   },
   bottomNav: {
     flexDirection: "row",
-    justifyContent: "space-between",
     padding: 20,
     paddingTop: 10,
     paddingBottom: 10,
+    justifyContent: "space-between",
   },
-  rankContainer: {
-    backgroundColor: '#4CAF50',
-    padding: 10,
-    borderRadius: 5,
+  bottomNavIcon: {
+    width: 50,
   },
-});
+  });
