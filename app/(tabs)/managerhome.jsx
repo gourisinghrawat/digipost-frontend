@@ -216,9 +216,10 @@ export default function DashboardScreen() {
         console.log(solutions);
         setsuggestedsolutions(solutions);
         console.log(suggestedsolutions);
+        console.log(4);
         const [key, record] = Object.entries(suggestedsolutions)[0];
-        console.log("Community Engagement:", record.Region);
         renderTable(record);
+
       }
     };
   
@@ -229,24 +230,25 @@ export default function DashboardScreen() {
   
   
 
+
   const renderTable = (record) => {
     return (
       <View style={styles.tableContainer}>
-        <Text style={styles.tableHeader}>Water Solutions</Text>
+        <Text style={styles.tableHeader}>Fuel Usage Solutions</Text>
+        <Text style={styles.tableRow}>{record.Fuel_Usage_Solutions}</Text>
+        
+        <Text style={styles.tableHeader}>Community Engagement Actvities</Text>
+        <Text style={styles.tableRow}>{record.Community_Engagement}</Text>
+
+        <Text style={styles.tableHeader}>General Infrastrcture</Text>
+        <Text style={styles.tableRow}>{record.General_Infrastructure_Checklist}</Text>
+        
+        <Text style={styles.tableHeader}>Water Usage Solutions</Text>
         <Text style={styles.tableRow}>{record.Water_Usage_Solutions}</Text>
         
         <Text style={styles.tableHeader}>Energy Solutions</Text>
         <Text style={styles.tableRow}>{record.Energy_Usage_Solutions}</Text>
-
-        <Text style={styles.tableHeader}>Fuel_Usage_Solutions</Text>
-        <Text style={styles.tableRow}>{record.Fuel_Usage_Solutions}</Text>
-
-        <Text style={styles.tableHeader}>Community_Engagement</Text>
-        <Text style={styles.tableRow}>{record.Community_Engagement}</Text>
-
-        <Text style={styles.tableHeader}>Infrastructure Solutions</Text>
-        <Text style={styles.tableRow}>{record.General_Infrastructure_Checklist}</Text>
-
+        
       </View>
     );
   };
@@ -288,6 +290,7 @@ export default function DashboardScreen() {
           ))}
         </View>
       </View>
+      <Header/>
       <View style={styles.statsGrid}>
         {statsData.map((stat, index) => (
           <StatCard key={index} {...stat} />
@@ -311,19 +314,36 @@ export default function DashboardScreen() {
         <Text style={styles.suggestedPlantsText}>{suggestedplants}</Text>
       </View>
 
-
-      <View style={styles.suggestedPlantsCard}>
-        <Text style={styles.suggestedPlantsTitle}>Suggested Solutions</Text>
-
-        {/* <Text style={styles.suggestedPlantsText}>{solutionrecord.Region}</Text> */}
-      </View>
       <Text style={styles.title}>Suggested Solutions</Text>
       {Object.keys(suggestedsolutions).length > 0 && renderTable(suggestedsolutions[Object.keys(suggestedsolutions)[0]])}
+
+
+
+
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  tableContainer: {
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: '#f9f9f9',
+  },
+  tableHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#333',
+  },
+  tableRow: {
+    fontSize: 16,
+    marginBottom: 8,
+    color: '#555',
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
