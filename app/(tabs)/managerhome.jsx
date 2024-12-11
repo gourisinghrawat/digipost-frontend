@@ -4,7 +4,8 @@ import { IconButton } from "@/pagecomponents/dashboard/components/IconButton";
 import { StatCard } from "@/pagecomponents/dashboard/components/StatCard";
 import { Header } from "@/pagecomponents/Header";
 import { usePostOffice } from "@/context/PostOfficeContext";
-
+import { database } from "@/constants/firebase";
+import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 
 const statsData = [
   { title: "Statastics", icon: require("@/assets/images/graph.png") },
@@ -12,6 +13,114 @@ const statsData = [
   { title: "Carbon Footprint", icon: require("@/assets/images/carbon.png") },
   { title: "Localized Eco Solutions", icon: require("@/assets/images/eco.png") },
 ];
+
+
+
+const getrecordforsolutions = async (regionvalue, typevalue) => {
+  try {
+    console.log(regionvalue);
+    console.log(typevalue);
+    const dbRef = ref(database, "solutiontable");
+    
+    // Fetch all records in the solutiontable
+    const allRecordsSnapshot = await get(dbRef);
+    if (allRecordsSnapshot.exists()) {
+      const allRecords = allRecordsSnapshot.val();
+      console.log("All records in solutiontable:", allRecords);
+
+      // Filter records by region and type of post office
+      const filteredRecords = Object.values(allRecords).filter(record => 
+        record.Region === regionvalue && record.Office_Type=== typevalue
+      );
+
+      if (filteredRecords.length > 0) {
+        console.log("Matching records:", filteredRecords);
+        return filteredRecords;
+      } else {
+        console.log("No matching records found");
+        return null;
+      }
+    } else {
+      console.log("No records found in solutiontable");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+  
+
+
+    // const postOfficeRef = query(
+    //   ref(database, 'postofficesdata'),
+    //   orderByChild('Post_Office_ID'),
+    //   equalTo(Number(postOfficeId.trim()))
+    // );
+    // const snapshot = await get(postOfficeRef);
+    
+    // const w = query(
+    //   ref(database, 'solutiontable'),
+    //   orderByChild('aqi_range'),
+    //   equalTo(Number(aqiValue))
+    // );
+    // const snapshot = await get(w);
+    // if (snapshot.exists()) {
+    //   const data = snapshot.val();
+    //   const [key, record] = Object.entries(data)[0];
+    //   console.log("Record found:", record);
+    //   return record.plants;
+    // } else {
+    //   console.log("No record found for the specified AQI");
+    //   return null;
+    // }
+
+
+
+const getRecordByAQI = async (aqiValue) => {
+  try {
+    console.log(aqiValue)
+    const dbRef = ref(database, "aqiplanttable");
+    const allRecordsSnapshot = await get(dbRef);
+    if (allRecordsSnapshot.exists()) {
+      console.log("All records in aqiplanttable:", allRecordsSnapshot.val());
+    } else {
+      console.log("No records found in aqiplanttable");
+    }
+
+
+    // const postOfficeRef = query(
+    //   ref(database, 'postofficesdata'),
+    //   orderByChild('Post_Office_ID'),
+    //   equalTo(Number(postOfficeId.trim()))
+    // );
+    // const snapshot = await get(postOfficeRef);
+    const q = query(dbRef, orderByChild("aqi_range"), equalTo(aqiValue));
+    
+    const w = query(
+      ref(database, 'aqiplanttable'),
+      orderByChild('aqi_range'),
+      equalTo(Number(aqiValue))
+    );
+    const snapshot = await get(w);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const [key, record] = Object.entries(data)[0];
+      console.log("Record found:", record);
+      return record.plants;
+    } else {
+      console.log("No record found for the specified AQI");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+
+
+
+
 
 const bottomNavIcons = [
   { source: require("@/assets/icons/mapicon.png") },
@@ -26,6 +135,9 @@ export default function DashboardScreen() {
   const [score, setscore]=useState(null);
   const [AQI, setAQI]=useState(null);
   const [suggestedplants, setsuggestedplants]=useState(null);
+  const [region, setregion]=useState(null);
+  const [type, settype]=useState(null);
+  const [suggestedsolutions, setsuggestedsolutions]=useState(null);
 
 
   useEffect(() => {
@@ -46,12 +158,21 @@ export default function DashboardScreen() {
       setscore(score);
 
 
+      const region = nestedData['Region'];
+      setregion(region);
+      console.log(region)
+
+      const type = nestedData['Type_of_Post_Office'];
+      settype(type);
+      console.log(type)
+
+
       const AQI = nestedData['Typical_AQI_Range'];
       setAQI(AQI);
 
 
-      const suggestedplants = nestedData['Suggested_Plants_for_Plantation'];
-      setsuggestedplants(suggestedplants);
+      // const suggestedplants = nestedData['Suggested_Plants_for_Plantation'];
+      // setsuggestedplants(suggestedplants);
 
 
       console.log(AQI)
@@ -63,10 +184,41 @@ export default function DashboardScreen() {
 
       // You can now use extractedFields as needed
       console.log('Extracted Fields:', extractedFields);
+      console.log((typeof AQI))
     } else {
       console.log('No post office data found');
     }
   }, [postOfficeData]);
+
+
+  useEffect(() => {
+    const fetchSuggestedPlants = async () => {
+      console.log(AQI);
+      const plants = await getRecordByAQI(AQI);
+      if (plants) {
+        setsuggestedplants(plants);
+      }
+    };
+  
+    if (AQI) {
+      fetchSuggestedPlants();
+    }
+  }, [AQI]);
+  
+
+  useEffect(() => {
+    const fetchsolutions = async () => {
+      console.log(region);
+      const solutions = await getrecordforsolutions(region,type);
+      if (solutions) {
+        setsuggestedsolutions(solutions);
+      }
+    };
+  
+    if (region && type) {
+      fetchsolutions();
+    }
+  }, [region,type]);
   
   return (
 

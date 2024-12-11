@@ -37,6 +37,7 @@ export default function ManagerSignIn() {
           userType: "manager",
           postOfficeId,
         });
+        
         setGlobalPostOfficeId(postOfficeId);
         setPostOfficeData(postOfficeData);
         alert('Manager signed in successfully!');
