@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/database';
 // Import getAnalytics only if you are running in a browser
 // import { getAnalytics } from "firebase/analytics";
 
@@ -19,8 +21,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = typeof window !== "undefined" ? getAnalytics(app) : null; // Use analytics only in browser
 
-// Export Firebase services
 export const auth = getAuth(app);
 export const database = getDatabase(app);
+export { firebase };
