@@ -27,7 +27,7 @@ export default function DashboardScreen() {
       <View style={styles.profileSection}>
         <View style={styles.profileBanner}>
           <Text style={styles.profileText}>
-            gopal Verma{"\n"}was employee{"\n"}of the month
+            gopal Verma{"\n"}was employee{"\n"}he month
           </Text>
         </View>
         <View style={styles.dotIndicators}>
