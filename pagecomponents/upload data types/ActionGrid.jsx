@@ -118,21 +118,8 @@ export function ActionGrid() {
   return (
     <View>
     <View style={styles.gridContainer}>
-    <View style={styles.gridItem} onPress={() => handleFileUpload("water")}>
-           <Button style={styles.itemContent}>
-             <View style={styles.iconWrapper}>
-               <Image
-                resizeMode="contain"
-                source={{ uri: "https://cdn.builder.io/api/v1/image/assets/0fe3c92d70f947bd8019826ed857d2fb/66eeba49fd63fd24dfec626cd507ca50ce4c8996d916a68b53c7479b6d89770e?apiKey=0fe3c92d70f947bd8019826ed857d2fb&", }}
-                style={styles.actionIcon}
-              />
-            </View>
-            <View style={styles.titleWrapper}>
-              <Text style={styles.titleText}>Water Bill</Text>
-            </View>
-           </Button>
-        </View>
-       {actionItems.map((item, index) => (
+    
+       {/* {actionItems.map((item, index) => (
          <Button key={index} style={styles.gridItem} onPress={() => handleFileUpload("water")}>
            <View style={styles.itemContent}>
              <View style={styles.iconWrapper}>
@@ -147,7 +134,7 @@ export function ActionGrid() {
             </View>
            </View>
         </Button>
-       ))}
+       ))} */}
      </View>
 
       <Button title="Upload Water Bill" onPress={() => handleFileUpload("water")} />

@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons"; // Use Ionicons for the back icon
 
 import { Header } from "@/pagecomponents/Header";
 import { UploadSection } from "@/pagecomponents/upload data types/UploadSection";
-import { NavigationBar } from "@/pagecomponents/upload data types/NavigationBar";
+import {NavigationBar} from "@/pagecomponents/upload data types/NavigationBar";
 import { ActionGrid } from "@/pagecomponents/upload data types/ActionGrid";
 
 export default function DashboardLayout({ navigation }) {

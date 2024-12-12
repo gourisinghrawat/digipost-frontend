@@ -3,7 +3,7 @@ import { useState } from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import PlantItem from "./PlantItem";
 
-function PlantSuggestionCard({ pdata }) {
+function PlantSuggestionCard({ pdata, pname }) {
   // Split the pdata string into an array of words, assuming words are separated by commas
   const plantsFromData = pdata ? pdata.split(",") : [];
 
@@ -28,7 +28,7 @@ function PlantSuggestionCard({ pdata }) {
             style={styles.titleContainer}
           >
             <View style={styles.titleWrapper}>
-              <Text>{"Plants Suggestions"}</Text>
+              <Text>{pname}</Text>
             </View>
             <Image
               resizeMode="contain"

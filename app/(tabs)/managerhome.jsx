@@ -8,6 +8,7 @@ import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import {HeroSection} from "@/pagecomponents/homeScreen/HeroSection";
 import PlantSuggestionCard from "../../pagecomponents/postOffice/components/PlantSuggestionCard";
 
+import {NavigationBar} from "@/pagecomponents/upload data types/NavigationBar";
 
 
 
@@ -245,17 +246,14 @@ export default function DashboardScreen() {
         </View>
   
         <View style={styles.suggestionsContainer}>
-        <PlantSuggestionCard pdata={suggestedplants}/><PlantSuggestionCard/><PlantSuggestionCard/>
+        <PlantSuggestionCard pdata={suggestedplants} pname={"Suggested Plants"}/>
+        <PlantSuggestionCard pdata={suggestedsolutions?.Community_Engagement} pname={"Community Engagement"}/>
+        <PlantSuggestionCard pdata={suggestedsolutions?.Water_Usage_Solutions} pname={"water usage"}/>
+        <PlantSuggestionCard pdata={suggestedsolutions?.Energy_Usage_Solutions} pname={"energy usage"}/>
         </View>
       </View>
       
-      <View style={styles.suggestedPlantsCard}>
-        <Text style={styles.suggestedPlantsTitle}>Suggested Plants</Text>
-        <Text style={styles.suggestedPlantsText}>{suggestedplants}</Text>
-      </View>
-      <Text>
-        {suggestedsolutions?.Community_Engagement}
-      </Text>
+      
     </ScrollView>
   );
   
