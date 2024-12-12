@@ -63,12 +63,12 @@ export default function RoleSelector() {
               />
             ))}
           </View>
-          <View style={styles.navigationContainer}>
+          {/* <View style={styles.navigationContainer}>
               <TouchableOpacity style={styles.backButton}>
                   <Text style={styles.backButtonText}>Back</Text>
               </TouchableOpacity>
 
-          </View>
+          </View> */}
         </View>
       </View>
     </View>

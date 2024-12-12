@@ -29,47 +29,7 @@ function BlogContent() {
       </View>
       <View style={styles.blogText}>
         <Text>
-          Lorem ipsum dolor sit amet consectetur. Tincidunt nullam faucibus
-          proin donec iaculis volutpat. Aliquam nunc odio sit lectus amet
-          imperdiet. Nunc ultrices ultricies ornare est. Malesuada ac cursus
-          integer quam maecenas aenean aliquam. Nisl fringilla eu tortor in
-          etiam pharetra purus lorem posuere. Laoreet nunc euismod pulvinar
-          porta. Adipiscing tempus eu in auctor fringilla massa enim ut. Risus
-          sed posuere tincidunt hac elit ut laoreet. Commodo eget blandit
-          dignissim adipiscing. Elit hendrerit vel sed tellus leo. Eget sed
-          consectetur eu lectus ultrices. Non augue bibendum non nascetur sem
-          senectus sem malesuada. Tellus imperdiet tempor magna ultrices enim.
-          {"\n\n"}
-          Felis adipiscing tortor facilisis in ultrices ut. Maecenas consequat
-          ornare faucibus eros. Diam nulla est nulla volutpat elementum. Justo
-          viverra ac viverra ac in sollicitudin nunc vitae quis. Id quis
-          dignissim facilisis arcu eu duis. Mi augue purus malesuada euismod
-          venenatis gravida pellentesque nullam proin. Tellus ultrices facilisis
-          risus mauris id facilisis ut. Arcu integer tellus cursus aliquet arcu
-          placerat. Feugiat in sit dignissim aliquet. Suspendisse aliquam massa
-          dui netus. Feugiat convallis non non elementum id amet urna.
-          {"\n\n"}
-          Tortor vel suspendisse magnis ut egestas et vel ultricies. Suspendisse
-          mauris amet commodo sit. Nisl nulla tincidunt sit viverra pharetra.
-          Faucibus platea amet ultricies consectetur cras sit ante nisl massa.
-          Aliquam consequat ipsum dignissim pulvinar. Euismod viverra risus
-          rhoncus ultrices libero. Velit faucibus nec venenatis ipsum fusce urna
-          vel nullam. Erat cras gravida pharetra mattis adipiscing felis turpis.
-          {"\n\n"}
-          Aliquet nisl hendrerit pellentesque quam non odio. Sem blandit
-          interdum lacinia nunc. Aliquam vulputate iaculis dignissim proin. Dui
-          aenean id facilisis pharetra dictumst fringilla. Bibendum massa
-          fringilla non quis mauris.
-          {"\n\n"}
-          Tempus massa odio scelerisque vestibulum blandit gravida donec eu
-          nulla. Malesuada venenatis lacus eget in est. Sollicitudin posuere
-          interdum eu amet volutpat interdum amet. Semper sodales at cras sed
-          ullamcorper neque sollicitudin volutpat. Tortor eu mauris amet
-          condimentum dui quis in. Tristique sagittis mattis facilisis nisi ac
-          tellus nulla. Cursus sodales habitant tincidunt nec lobortis egestas
-          tincidunt. Leo aliquam nisl ultricies consequat risus sed ut tellus.
-          Mattis urna dictumst posuere purus est sem. Placerat amet duis amet
-          in.
+        Sustainability is a social goal for people to co-exist on Earth over a long period of time. Definitions of this term are disputed and have varied with literature, context, and time.[2][1] Sustainability usually has three dimensions (or pillars): environmental, economic, and social.[1] Many definitions emphasize the environmental dimension.[3][4] This can include addressing key environmental problems, including climate change and biodiversity loss. The idea of sustainability can guide decisions at the global, national, organizational, and individual levels.[5] A related concept is that of sustainable development, and the terms are often used to mean the same thing.[6] UNESCO distinguishes the two like this: "Sustainability is often thought of as a long-term goal (i.e. a more sustainable world), while sustainable development refers to the many processes and pathways to achieve it.
         </Text>
       </View>
     </View>
